@@ -1,0 +1,51 @@
+<div class="navigation">
+    <button class="nav-button" (click)="navigateTo('home')">Головна</button>
+    <button class="nav-button" (click)="navigateTo('quiz')">Гра</button>
+    <button class="nav-button" (click)="navigateTo('about')">Про гру</button>
+    <button class="nav-button" (click)="navigateTo('creator')">Автори</button>
+  </div>
+  
+  <div *ngIf="currentPage === 'home'" class="home">
+    <h2 class="title">Ласкаво просимо до Гри-Вікторини!</h2>
+    <p>Виберіть "Гра" у меню, щоб почати відповідати на запитання.</p>
+  </div>
+  
+  <div *ngIf="currentPage === 'quiz'" class="quiz-container">
+    <h2 class="title">Гра-Вікторина</h2>
+    <div *ngIf="currentQuestionIndex < questions.length; else gameOver">
+      <p class="question-info">Питання {{ currentQuestionIndex + 1 }} з {{ questions.length }}</p>
+      <p class="question">{{ questions[currentQuestionIndex].question }}</p>
+      <p class="timer">Час: {{ timeLeft }} сек</p>
+      <div class="options">
+        <label *ngFor="let option of questions[currentQuestionIndex].options">
+          <input
+            type="radio"
+            name="option"
+            [value]="option"
+            [(ngModel)]="selectedOption"
+            (change)="handleOptionChange(option)"
+          />
+          {{ option }}
+        </label>
+      </div>
+      <button class="next-button" (click)="handleNextQuestion()">Наступне Питання</button>
+      <button class="skip-button" (click)="handleSkipQuestion()">Пропустити Питання</button>
+    </div>
+    <ng-template #gameOver>
+      <p class="game-over">Гру Закінчено!</p>
+      <p class="score">Ваш фінальний результат: {{ score }} з {{ questions.length }}.</p>
+      <p class="details">Правильні відповіді: {{ correctAnswers }} | Неправильні відповіді: {{ incorrectAnswers }}</p>
+      <button class="restart-button" (click)="handleRestart()">Грати Знову</button>
+    </ng-template>
+  </div>
+  
+  <div *ngIf="currentPage === 'about'" class="about">
+    <h2>Про гру</h2>
+    <p>Ця гра-вікторина призначена для тестування ваших знань у різних сферах: географії, науці, історії тощо. Бажаємо удачі!</p>
+  </div>
+  
+  <div *ngIf="currentPage === 'creator'" class="creator">
+    <h2>Автори</h2>
+    <p>Цю гру створив талановитий студент Пузаков Нікіта К-31</p>
+  </div>
+  

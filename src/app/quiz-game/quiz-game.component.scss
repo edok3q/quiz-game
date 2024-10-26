@@ -1,0 +1,224 @@
+// Основные переменные
+$primary-color: #007bff;
+$highlight-color: #4caf50;
+$background-color: #f3f4f6;
+$box-shadow-color: rgba(0, 0, 0, 0.2);
+$error-color: #e74c3c;
+$timer-color: #ff9800;
+$timer-warning: #ff5722;
+
+// Анимации
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes timerPulse {
+  0% {
+    background-color: $timer-color;
+  }
+  50% {
+    background-color: $timer-warning;
+  }
+  100% {
+    background-color: $timer-color;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Основной контейнер
+.quiz-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px $box-shadow-color;
+  animation: fadeIn 0.5s ease-in-out;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Заголовок
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: $primary-color;
+  text-transform: uppercase;
+}
+
+// Таймер
+.timer {
+  font-size: 18px;
+  color: $timer-color;
+  font-weight: bold;
+  margin-bottom: 10px;
+  animation: timerPulse 1s infinite;
+
+  &.warning {
+    animation: timerPulse 0.5s infinite;
+  }
+}
+
+// Вопрос и опции
+.question {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+  animation: fadeIn 0.4s ease;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  
+  label {
+    font-size: 16px;
+    padding: 10px;
+    background-color: $background-color;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    
+    &:hover {
+      background-color: lighten($background-color, 10%);
+      transform: scale(1.02);
+    }
+    
+    input {
+      margin-right: 10px;
+    }
+  }
+}
+
+// Кнопки
+.next-button,
+.restart-button,
+.skip-button {
+  background-color: $primary-color;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s ease, transform 0.2s;
+  animation: buttonPulse 2s infinite;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.skip-button {
+  background-color: $error-color;
+
+  &:hover {
+    background-color: darken($error-color, 10%);
+  }
+}
+
+// Завершение игры
+.game-over {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: $highlight-color;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.score {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: darken($primary-color, 15%);
+}
+
+// Анимация исчезновения вопроса при ответе
+.question-exit {
+  animation: slideOut 0.5s forwards;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  
+    .nav-button {
+      background-color: $primary-color;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+  
+  // Дополнительные стили для других страниц (главной, о нас, авторы)
+  .home, .about, .creator {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px $box-shadow-color;
+    text-align: center;
+  
+    h2 {
+      color: $primary-color;
+    }
+  
+    p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  }
+  
